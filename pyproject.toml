@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "updc-reconstruction"
+version = "1.1.0"
+description = "Frozen v17 UPDC numerical core with stable CLI, configuration schema, adapters, and cache ABI"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {file = "LICENSE"}
+authors = [{name = "UPDC project"}]
+dependencies = ["numpy>=1.24", "astropy>=5", "tomli>=2; python_version < '3.11'"]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: C",
+  "Topic :: Scientific/Engineering :: Astronomy"
+]
+
+[project.optional-dependencies]
+jwst = ["jwst"]
+test = ["pytest>=7"]
+dev = ["pytest>=7", "build>=1", "twine>=5"]
+
+[project.scripts]
+updc = "updc.cli:main"
+updc-jwst = "updc_jwst.cli:main"
+
+[project.entry-points."updc.instrument_adapters"]
+# Third-party packages register adapters in this group.
+
+[tool.setuptools.packages.find]
+include = ["updc*", "updc_jwst*"]
+
+[tool.setuptools.package-data]
+updc = [
+  "c_core/*.c", "c_core/*.h", "c_core/CMakeLists.txt", "c_core/Makefile",
+  "schemas/*.json", "templates/*.toml", "*.json"
+]

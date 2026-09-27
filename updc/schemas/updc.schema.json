@@ -1,0 +1,244 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://updc.example/schema/updc-v1.json",
+  "title": "UPDC configuration schema v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "updc",
+    "instrument",
+    "input",
+    "psf"
+  ],
+  "properties": {
+    "updc": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": 1
+        }
+      }
+    },
+    "instrument": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "adapter"
+      ],
+      "properties": {
+        "adapter": {
+          "type": "string",
+          "minLength": 1
+        },
+        "options": {
+          "type": "object"
+        }
+      }
+    },
+    "input": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "input_dir": {
+          "type": "string"
+        },
+        "input_glob": {
+          "type": "string"
+        },
+        "pairing": {
+          "enum": [
+            "index",
+            "sorted"
+          ]
+        },
+        "manifest": {
+          "type": "string"
+        },
+        "jwst_dir": {
+          "type": "string"
+        },
+        "wcs_mode": {
+          "enum": [
+            "auto",
+            "gwcs",
+            "fits"
+          ]
+        },
+        "weight_mode": {
+          "enum": [
+            "rnoise-sky",
+            "totalvar",
+            "mask"
+          ]
+        },
+        "bad_dq_mask": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "poisson_pedestal_sigma": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "psf": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "psf_dir": {
+          "type": "string"
+        },
+        "psf_glob": {
+          "type": "string"
+        },
+        "psf_orientation": {
+          "enum": [
+            "stored-transposed",
+            "as-is"
+          ]
+        },
+        "psf_frame": {
+          "enum": [
+            "detector",
+            "target"
+          ]
+        },
+        "psf_oversample": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "psf_crop_size": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "psf_anchor_x": {
+          "type": "number"
+        },
+        "psf_anchor_y": {
+          "type": "number"
+        },
+        "write_transformed_psf": {
+          "type": "boolean"
+        }
+      }
+    },
+    "solver": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "iterations": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "upsample": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "save_every": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "performance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "workers": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "fft_workers": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "exposure_workers": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "preprocess_workers": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "fft_plan": {
+          "enum": [
+            "estimate",
+            "measure"
+          ]
+        },
+        "fft_autotune": {
+          "type": "boolean"
+        },
+        "retune_fft": {
+          "type": "boolean"
+        }
+      }
+    },
+    "cache": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "cache_dir": {
+          "type": "string"
+        },
+        "fftw_wisdom": {
+          "type": "string"
+        },
+        "reset": {
+          "enum": [
+            "none",
+            "current",
+            "all"
+          ]
+        },
+        "prune_after_days": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "output": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "output_dir": {
+          "type": "string"
+        },
+        "output_stem": {
+          "type": "string"
+        },
+        "metrics_json": {
+          "type": "string"
+        },
+        "keep_work": {
+          "type": "boolean"
+        },
+        "work_dir": {
+          "type": "string"
+        }
+      }
+    },
+    "build": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "cc": {
+          "type": "string"
+        },
+        "c_core_binary": {
+          "type": "string"
+        },
+        "psf_projector_binary": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

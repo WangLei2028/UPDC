@@ -1,0 +1,60 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  core:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install FFTW (Ubuntu)
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y libfftw3-dev pkg-config cmake
+      - name: Install FFTW (macOS)
+        if: runner.os == 'macOS'
+        run: brew install fftw pkg-config cmake
+      - name: Build frozen C core
+        run: cmake -S updc/c_core -B build -DUPDC_NATIVE_ARCH=OFF && cmake --build build --config Release
+      - name: Core self-test
+        run: ctest --test-dir build --output-on-failure
+
+  python:
+    strategy:
+      matrix:
+        python: ['3.10', '3.11', '3.12', '3.13']
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update && sudo apt-get install -y libfftw3-dev pkg-config cmake
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m pip install -U pip
+      - run: python -m pip install '.[test]'
+      - run: python -m pytest -q
+      - run: updc doctor --cc gcc
+
+  wheel:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: sudo apt-get update && sudo apt-get install -y libfftw3-dev pkg-config cmake
+      - run: python -m pip install -U pip build twine
+      - run: python -m build
+      - run: python -m twine check dist/*
+      - run: python -m pip install dist/*.whl
+      - run: updc --version
+      - run: updc doctor --cc gcc
+      - name: Installed-template validation
+        run: |
+          mkdir -p /tmp/updc/data/level2 /tmp/updc/data/psf
+          updc init /tmp/updc/updc.toml
+          updc validate /tmp/updc/updc.toml

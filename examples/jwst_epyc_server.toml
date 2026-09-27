@@ -1,0 +1,49 @@
+[updc]
+schema_version = 1
+
+[instrument]
+adapter = "jwst"
+
+[input]
+input_dir = "../data/JWST/NIRCam/level2"
+input_glob = "*_cal*.fits"
+pairing = "index"
+wcs_mode = "gwcs"
+weight_mode = "rnoise-sky"
+bad_dq_mask = 531
+poisson_pedestal_sigma = 0.0
+
+[psf]
+psf_dir = "../data/JWST/PSF"
+psf_glob = "*.fits"
+psf_orientation = "stored-transposed"
+psf_frame = "detector"
+psf_oversample = 2
+psf_crop_size = 1431
+write_transformed_psf = false
+
+[solver]
+iterations = 19
+upsample = 2
+save_every = 5
+
+[performance]
+workers = 9
+fft_workers = 9
+exposure_workers = 9
+preprocess_workers = 9
+fft_plan = "measure"
+fft_autotune = true
+retune_fft = false
+
+[cache]
+enabled = true
+reset = "none"
+prune_after_days = 30
+
+[output]
+output_dir = "../output/UPDC"
+keep_work = false
+
+[build]
+cc = "gcc"

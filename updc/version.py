@@ -1,0 +1,3 @@
+__version__ = "1.1.0"
+CORE_FREEZE_VERSION = "v17"
+CONFIG_SCHEMA_VERSION = 1

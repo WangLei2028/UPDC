@@ -1,0 +1,45 @@
+name: Bug report
+description: Report a reproducible UPDC software or build problem
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: "Please remove proprietary or sensitive astronomical data before attaching files."
+  - type: input
+    id: version
+    attributes:
+      label: UPDC version
+      placeholder: "1.1.0"
+    validations:
+      required: true
+  - type: input
+    id: platform
+    attributes:
+      label: Platform / compiler / FFTW
+      placeholder: "Linux, AMD EPYC, GCC 13.3, FFTW 3.3.5"
+    validations:
+      required: true
+  - type: textarea
+    id: command
+    attributes:
+      label: Command and relevant TOML settings
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Observed behavior / traceback
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: doctor
+    attributes:
+      label: updc doctor output
+      description: Paste `updc doctor --cc <compiler>` when the problem involves compilation or FFTW.

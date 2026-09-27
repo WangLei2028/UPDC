@@ -1,0 +1,25 @@
+UPDC scientific publication citation policy
+===========================================
+
+UPDC is distributed under the MIT License in LICENSE.
+
+For scholarly or other publication use, including journal papers, conference
+proceedings, theses/dissertations, technical reports, data-release papers, or
+other published work that uses the UPDC code, its algorithmic implementation,
+or scientific results produced with UPDC, the UPDC project requires citation
+of BOTH publications below:
+
+1. Wang, L., Li, G., & Kang, X. 2022, "Towards super-resolution via iterative
+   multi-exposure coaddition", Monthly Notices of the Royal Astronomical
+   Society, 517, 787. doi:10.1093/mnras/stac2664
+
+2. Wang, L., Shan, H., Nie, L., et al. 2025, "UPdec-Webb: A Data Set for
+   Coaddition of JWST NIRCam Images", The Astrophysical Journal Supplement
+   Series, 276, 36. doi:10.3847/1538-4365/ad9566
+
+Machine-readable citation metadata and BibTeX entries are provided in
+CITATION.cff and CITATION.md.
+
+This publication-citation policy is a scientific attribution policy of the
+UPDC project. It is separate from, and does not modify, the permissions and
+conditions of the MIT License.

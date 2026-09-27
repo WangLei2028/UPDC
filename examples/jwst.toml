@@ -1,0 +1,59 @@
+# UPDC stable configuration schema v1.
+# Relative paths are resolved from this file's directory.
+
+[updc]
+schema_version = 1
+
+[instrument]
+adapter = "jwst"                 # built-ins: jwst, fits; plugins may add others
+# [instrument.options]             # adapter-specific options are allowed here
+
+[input]
+input_dir = "./data/level2"
+input_glob = "*_cal*.fits"
+pairing = "index"
+wcs_mode = "gwcs"
+weight_mode = "rnoise-sky"
+bad_dq_mask = 531
+poisson_pedestal_sigma = 0.0
+
+[psf]
+psf_dir = "./data/psf"
+psf_glob = "*.fits"
+psf_orientation = "stored-transposed"
+psf_frame = "detector"
+psf_oversample = 2
+psf_crop_size = 1431
+write_transformed_psf = false
+
+[solver]
+iterations = 19
+upsample = 2
+save_every = 5
+
+[performance]
+workers = 1
+fft_workers = 2
+exposure_workers = 2
+preprocess_workers = 4
+fft_plan = "measure"
+fft_autotune = true
+retune_fft = false
+
+[cache]
+enabled = true
+reset = "none"              # none | current | all; set back to none after a forced rebuild
+prune_after_days = 0          # 0 disables; e.g. 30 prunes stale dataset caches on next UPDC start
+# cache_dir = "~/.cache/updc-jwst/data"      # default retained for v17 cache compatibility
+# fftw_wisdom = "~/.cache/updc-jwst/fftwf_wisdom"
+
+[output]
+output_dir = "./output"
+keep_work = false
+# output_stem = "science_field"
+# metrics_json = "./output/metrics.json"
+
+[build]
+cc = "cc"
+# c_core_binary = "/path/to/prebuilt/updc_jwst_c"
+# psf_projector_binary = "/path/to/prebuilt/updc_psf_projector"

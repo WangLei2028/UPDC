@@ -1,0 +1,40 @@
+cff-version: 1.2.0
+message: >-
+  If you use UPDC code, its algorithmic implementation, or results produced
+  with UPDC in a scholarly or other publication, cite both papers listed in
+  references.
+title: UPDC Reconstruction
+version: 1.1.0
+date-released: 2026-09-27
+license: MIT
+authors:
+  - name: UPDC Project
+references:
+  - type: article
+    title: Towards super-resolution via iterative multi-exposure coaddition
+    authors:
+      - family-names: Wang
+        given-names: L.
+      - family-names: Li
+        given-names: G.
+      - family-names: Kang
+        given-names: X.
+    journal: Monthly Notices of the Royal Astronomical Society
+    volume: '517'
+    start: '787'
+    year: 2022
+    doi: 10.1093/mnras/stac2664
+  - type: article
+    title: 'UPdec-Webb: A Data Set for Coaddition of JWST NIRCam Images'
+    authors:
+      - family-names: Wang
+        given-names: L.
+      - family-names: Shan
+        given-names: H.
+      - family-names: Nie
+        given-names: L.
+    journal: The Astrophysical Journal Supplement Series
+    volume: '276'
+    start: '36'
+    year: 2025
+    doi: 10.3847/1538-4365/ad9566

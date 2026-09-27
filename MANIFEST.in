@@ -1,0 +1,9 @@
+include README.md LICENSE NOTICE CITATION.cff CITATION.md SECURITY.md RELEASE_NOTES.md CHANGELOG.md CONTRIBUTING.md
+recursive-include updc/c_core *.c *.h CMakeLists.txt Makefile
+recursive-include updc/schemas *.json
+recursive-include updc/templates *.toml
+recursive-include docs *.md *.pdf
+recursive-include examples *.toml *.py *.csv
+recursive-include tests *.py
+recursive-include tools *.py
+include RELEASE_MANIFEST.json

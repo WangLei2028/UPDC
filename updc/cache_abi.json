@@ -1,0 +1,5 @@
+{
+  "python_preprocess": {"abi": 1, "marker": "updc-v16-preprocess-1"},
+  "linkmap": {"abi": 2, "magic_hex": "0x324d4c55", "encodings": {"ABS32": 1, "DELTA16": 2}},
+  "fft_autotune": {"abi": 1, "filename_prefix": "fft_autotune_v1_"}
+}

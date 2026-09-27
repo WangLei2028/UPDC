@@ -1,0 +1,30 @@
+name: Feature request
+description: Propose an interface, adapter, workflow, or documentation improvement
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Scientific or engineering need
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+    validations:
+      required: true
+  - type: dropdown
+    id: core
+    attributes:
+      label: Does this require changing the frozen numerical core?
+      options:
+        - "No / unsure"
+        - "Yes"
+    validations:
+      required: true
+  - type: textarea
+    id: validation
+    attributes:
+      label: Validation data or acceptance criteria
